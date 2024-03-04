@@ -86,7 +86,7 @@ export default function HomePage() {
             key={id}
           >
             <div
-              className={`w-full md:w-1/2 px-4 md:px-12 py-8 ${alignRight ? "md:order-last" : ""}`}
+              className={`w-full md:w-1/2 px-4 md:px-12 py-8 float ${alignRight ? "md:order-last" : ""}`}
             >
               <img
                 src={imageUrl}
