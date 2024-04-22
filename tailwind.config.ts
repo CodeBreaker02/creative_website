@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import containerQueries from "@tailwindcss/container-queries";
 
 const config: Config = {
   content: [
@@ -7,8 +8,15 @@ const config: Config = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   fontFamily: {
-    clash: ['var(--clash-grotesk-font)'],
+    clash: ["var(--clash-grotesk-font)"],
+    ranade: ["var(--ranade-font)"],
+    supports: {
+      sda: "timeline-scope: none",
+    },
+    fontsize: {
+      xxs: "0.55rem",
+    },
   },
-  plugins: [],
+  plugins: [containerQueries],
 };
 export default config;

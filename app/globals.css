@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --black: #141414;
+  --yellowGreen: #ab1050;
+  --yellow: yellow;
+  --royalblue: royalblue;
+  --magenta: #c59358;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -11,10 +19,6 @@ html,
 body {
   height: 100%;
   width: 100%;
-}
-
-body {
-  background-color: #f7f1e3;
 }
 
 body {
@@ -58,3 +62,5 @@ body {
     transform: translatey(0px);
   }
 }
+
+/* Horizontal scroll */
