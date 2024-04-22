@@ -9,10 +9,15 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@studio-freight/lenis": "^1.0.42",
+    "@studio-freight/react-lenis": "^0.0.45",
+    "@tailwindcss/container-queries": "^0.1.1",
+    "lenis": "^0.0.2",
     "next": "14.1.1",
     "prettier": "^3.2.5",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "resize-observer-polyfill": "^1.5.1"
   },
   "devDependencies": {
     "@types/node": "^20",

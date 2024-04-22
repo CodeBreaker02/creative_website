@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { motion, useAnimation } from "framer-motion";
+import SmoothScroll from "@/app/components/HorizontalGallery";
 
 export default function HomePage() {
   const controls = useAnimation();
