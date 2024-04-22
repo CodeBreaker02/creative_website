@@ -16,7 +16,7 @@ const ParallaxCover = () => {
       >
         <div className="text-center p-20">
           <h1 className="text-5xl uppercase text-white font-bold mb-4">
-            #Pharrell's LV FW24 collection
+            #Pharrell&apos;s LV FW24 collection
           </h1>
         </div>
       </motion.div>
@@ -200,9 +200,10 @@ const HorizontalScrollCarousel = () => {
             True to Louis Vuitton&apos;s attention to detail, accessories
             include a floral-patterned belt, a versatile green cross-body bag,
             and a matching golf glove, adding both function and flair. The open
-            sandals echo the collection's green motif, offering both comfort and
-            coordination. Our model stands poised with a golf club, surrounded
-            by golf balls, indicating a leisurely indoor putting practice.
+            sandals echo the collection&apos;s green motif, offering both
+            comfort and coordination. Our model stands poised with a golf club,
+            surrounded by golf balls, indicating a leisurely indoor putting
+            practice.
           </p>
           <p className="mt-4 italic">
             Indulge in the luxury of downtime with Louis Vuitton.
