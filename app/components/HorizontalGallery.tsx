@@ -92,7 +92,7 @@ const Example = () => {
                 </li>
                 <li className="mb-1">
                   <a href="/faqs" className="hover:underline">
-                    FAQ's
+                    FAQ&apos;s
                   </a>
                 </li>
                 <li className="mb-1">
@@ -197,9 +197,9 @@ const HorizontalScrollCarousel = () => {
             that punctuates the outfit with a pop of color.
           </p>
           <p className="mt-2">
-            True to Louis Vuitton's attention to detail, accessories include a
-            floral-patterned belt, a versatile green cross-body bag, and a
-            matching golf glove, adding both function and flair. The open
+            True to Louis Vuitton&apos;s attention to detail, accessories
+            include a floral-patterned belt, a versatile green cross-body bag,
+            and a matching golf glove, adding both function and flair. The open
             sandals echo the collection's green motif, offering both comfort and
             coordination. Our model stands poised with a golf club, surrounded
             by golf balls, indicating a leisurely indoor putting practice.
@@ -262,7 +262,7 @@ const cards: CardType[] = [
   },
   {
     url: "https://eu.louisvuitton.com/content/dam/lv/online/high-end/wolv/fashion-shows/M_Fa_Show_Mens_SS24.html/jcr:content/assets/grid/230620_LV_MEN_SHOW_KEY_LOOK_06_0015_MENS_SS24_SHOW_KEY_LOOKS_GROUPSHOT_LVCOM_DI3_2048x1152_8.jpg?imwidth=2400",
-    title: "Men's Ensemble",
+    title: "Men&apos;s Ensemble",
     id: 2,
   },
   {
