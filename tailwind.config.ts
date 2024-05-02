@@ -8,7 +8,7 @@ const config: Config = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   fontFamily: {
-    clash: ["var(--clash-grotesk-font)"],
+    clashGrotesk: ["var(--clash-grotesk-font)"],
     ranade: ["var(--ranade-font)"],
     supports: {
       sda: "timeline-scope: none",

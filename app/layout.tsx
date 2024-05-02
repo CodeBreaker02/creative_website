@@ -16,7 +16,7 @@ const clashGrotesk = localFont({
 });
 
 const ranade = localFont({
-  variable: "--ranae-font",
+  variable: "--ranade-font",
   display: "swap",
   src: [
     {
@@ -38,7 +38,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={ranade.className}>
+      <body className={`${ranade.variable} ${clashGrotesk.variable}`}>
         <SmoothScrolling>{children}</SmoothScrolling>
       </body>
     </html>
