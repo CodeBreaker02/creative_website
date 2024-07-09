@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import "./globals.css";
 import localFont from "next/font/local";
 import React from "react";
-import SmoothScrolling from "@/app/components/SmoothScrolling";
 
 const clashGrotesk = localFont({
   variable: "--clash-grotesk-font",
@@ -37,10 +36,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${ranade.variable} ${clashGrotesk.variable}`}>
-        <SmoothScrolling>{children}</SmoothScrolling>
-      </body>
+    <html lang="en" className="scroll-smooth">
+      <body className={`${clashGrotesk.className}`}>{children}</body>
     </html>
   );
 }
