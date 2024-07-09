@@ -9,6 +9,7 @@ interface ColumnProps {
   y?: MotionValue<number>;
   className?: string;
 }
+
 const images = [
   "s1.jpg",
   "s2.jpg",
@@ -71,6 +72,9 @@ const Column: React.FC<ColumnProps> = ({ images, y = 0, className }) => {
     offset: ["start end", "end start"],
   });
 
+  const rotateY = useTransform(scrollYProgress, [0, 1], [0, 10]);
+  const rotateX = useTransform(scrollYProgress, [0, 1], [0, -20]);
+
   return (
     <motion.div
       className={`w-full flex flex-col gap-6 relative ${className}`}
@@ -82,8 +86,8 @@ const Column: React.FC<ColumnProps> = ({ images, y = 0, className }) => {
           key={i}
           className="relative w-full h-full overflow-hidden"
           style={{
-            rotateY: useTransform(scrollYProgress, [0, 1], [0, 10]),
-            rotateX: useTransform(scrollYProgress, [0, 1], [0, -20]),
+            rotateY,
+            rotateX,
             perspective: 1000,
           }}
         >
