@@ -1,5 +1,5 @@
+import React, { useEffect, useRef } from "react";
 import { motion, useTransform, useScroll, useAnimation } from "framer-motion";
-import { useEffect, useRef } from "react";
 
 const ParallaxCover = () => {
   const { scrollYProgress } = useScroll();
@@ -14,8 +14,8 @@ const ParallaxCover = () => {
           scale,
         }}
       >
-        <div className="text-center p-20">
-          <h1 className="text-5xl uppercase text-white font-bold mb-4">
+        <div className="text-center p-4 md:p-20">
+          <h1 className="text-3xl md:text-5xl uppercase text-white font-bold mb-4">
             #Pharrell&apos;s LV FW24 collection
           </h1>
         </div>
@@ -24,13 +24,119 @@ const ParallaxCover = () => {
   );
 };
 
+const HorizontalScrollCarousel = () => {
+  const targetRef = useRef<HTMLDivElement | null>(null);
+  const { scrollYProgress } = useScroll({
+    target: targetRef,
+  });
+
+  const controls = useAnimation();
+  const lastCardControls = useAnimation();
+  const x = useTransform(scrollYProgress, [0, 1], ["1%", "-90%"]);
+
+  useEffect(() => {
+    scrollYProgress.onChange((value) => {
+      if (value >= 0.95) {
+        controls.start({ opacity: 1, y: 0 });
+        lastCardControls.start({ scale: 1.6 });
+      } else {
+        controls.start({ opacity: 0, y: 0 });
+        lastCardControls.start({ scale: 1 });
+      }
+    });
+  }, [controls, lastCardControls, scrollYProgress]);
+
+  return (
+    <section ref={targetRef} className="relative h-[300vh]">
+      <div className="sticky top-0 flex h-screen items-center overflow-hidden pl-4 md:pl-14">
+        <motion.div style={{ x }} className="flex">
+          {cards.map((card, index) => (
+            <Card
+              card={card}
+              key={card.id}
+              controls={
+                index === cards.length - 1 ? lastCardControls : undefined
+              }
+            />
+          ))}
+        </motion.div>
+      </div>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={controls}
+        className="absolute bottom-[10%] right-[10%] text-base md:text-xl font-thin text-white w-full md:w-1/3 px-4 md:px-0 hidden md:block"
+      >
+        <motion.article
+          initial={{ scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.2 }}
+          className="w-full p-6 md:p-6 rounded-lg text-gray-800 bg-white bg-opacity-90"
+        >
+          <h2 className="text-xl md:text-2xl font-medium mb-4">
+            The Elegance of Leisure
+          </h2>
+          <p className="text-sm md:text-base">
+            Discover the epitome of relaxation and style with our latest
+            collection. Featured here is an ensemble that seamlessly blends
+            indoor comfort with a touch of sporting finesse. Our model, exuding
+            confidence and poise, showcases a pair of delicate pale pink pants
+            paired with a lustrous satin jacket, casually draped over the
+            shoulders for an effortless look. Underneath, a vibrant green
+            sweater harmonizes with the outdoors, accented by a silk neckerchief
+            that punctuates the outfit with a pop of color.
+          </p>
+        </motion.article>
+      </motion.div>
+    </section>
+  );
+};
+
+const Card = ({ card, controls }: { card: CardType; controls?: any }) => {
+  return (
+    <motion.div
+      className="group relative overflow-hidden"
+      style={{
+        minWidth: "250px",
+        minHeight: "375px",
+        maxWidth: "300px",
+        maxHeight: "450px",
+      }}
+      animate={controls}
+    >
+      <h4
+        className="text-xs uppercase font-medium"
+        style={{ opacity: controls ? 0 : 1 }}
+      >
+        {card.title}
+      </h4>
+      <span
+        className="text-black text-xs uppercase font-thin me-2 px-2.5 py-0.5 mb-4 border border-black"
+        style={{ opacity: controls ? 0 : 1 }}
+      >
+        LVOVERS
+      </span>
+      <div
+        style={{
+          backgroundImage: `url(${card.url})`,
+          backgroundSize: "contain",
+          backgroundPosition: "top center",
+          backgroundRepeat: "no-repeat",
+          width: "100%",
+          height: "100%",
+        }}
+        className="absolute z-0 mt-4 transition-transform duration-300 group-hover:scale-105"
+      ></div>
+    </motion.div>
+  );
+};
+
 const Example = () => {
   return (
     <div className="bg-white">
       <header className="bg-white py-4 shadow-md">
-        <div className="container mx-auto flex items-center justify-between">
-          <nav className="flex-grow">
-            <ul className="flex justify-start space-x-6">
+        <div className="container mx-auto px-4 flex flex-col md:flex-row items-center justify-between">
+          <nav className="w-full md:flex-grow mb-4 md:mb-0">
+            <ul className="flex justify-center md:justify-start space-x-4 md:space-x-6">
               <li>
                 <a href="/new" className="hover:text-gray-500">
                   New
@@ -54,20 +160,20 @@ const Example = () => {
             </ul>
           </nav>
 
-          <div className="flex-grow flex justify-center pr-40">
+          <div className="w-full md:flex-grow flex justify-center md:pr-40 mb-4 md:mb-0">
             <a
               href="/"
-              className="text-3xl uppercase text-black hover:text-gray-500"
+              className="text-2xl md:text-3xl uppercase text-black hover:text-gray-500"
             >
               Louis Vuitton
             </a>
           </div>
 
-          <div className="flex-grow flex justify-end items-center">
-            <a href="/search" className="hover:text-gray-500">
+          <div className="w-full md:flex-grow flex justify-center md:justify-end items-center">
+            <a href="/search" className="hover:text-gray-500 mr-4 md:mr-6">
               Search
             </a>
-            <a href="/account" className="ml-6 hover:text-gray-500">
+            <a href="/account" className="hover:text-gray-500">
               Account
             </a>
           </div>
@@ -77,7 +183,8 @@ const Example = () => {
       <ParallaxCover />
 
       <HorizontalScrollCarousel />
-      <footer className="bg-white py-12">
+
+      <footer className="bg-white py-8 md:py-12">
         <div className="max-w-7xl mx-auto px-4 lg:px-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-6">
             <div>
@@ -107,7 +214,7 @@ const Example = () => {
                 </li>
               </ul>
             </div>
-            {/* ... repeat blocks for each column ... */}
+            {/* Add more footer columns here */}
           </div>
 
           <div className="flex flex-col md:flex-row justify-between items-center border-t border-gray-200 pt-4 text-gray-600 text-sm">
@@ -119,7 +226,7 @@ const Example = () => {
             <div className="text-center mb-4 md:mb-0">
               <span className="font-semibold text-lg">LOUIS VUITTON</span>
             </div>
-            <div className="flex space-x-4">
+            <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-4">
               <a href="/sitemap" className="hover:underline">
                 Sitemap
               </a>
@@ -137,118 +244,6 @@ const Example = () => {
   );
 };
 
-const HorizontalScrollCarousel = () => {
-  const targetRef = useRef<HTMLDivElement | null>(null);
-  const { scrollYProgress } = useScroll({
-    target: targetRef,
-  });
-
-  const controls = useAnimation();
-  const lastCardControls = useAnimation();
-  const x = useTransform(scrollYProgress, [0, 1], ["1%", "-90%"]);
-
-  useEffect(() => {
-    scrollYProgress.onChange((value) => {
-      if (value >= 0.95) {
-        controls.start({ opacity: 1, y: 0 });
-        lastCardControls.start({ scale: 1.6 }); // Scale the last card
-      } else {
-        controls.start({ opacity: 0, y: 0 });
-        lastCardControls.start({ scale: 1 }); // Return to normal scale
-      }
-    });
-  }, [controls, lastCardControls, scrollYProgress]);
-
-  return (
-    <section ref={targetRef} className="relative h-[300vh]">
-      <div className="sticky top-0 flex h-screen items-center overflow-hidden pl-14">
-        <motion.div style={{ x }} className="flex">
-          {cards.map((card, index) => (
-            <Card
-              card={card}
-              key={card.id}
-              controls={
-                index === cards.length - 1 ? lastCardControls : undefined
-              }
-            />
-          ))}
-        </motion.div>
-      </div>
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={controls}
-        className="absolute bottom-[5%] left-1/3 transform -translate-x-1/2 text-xl font-thin text-white"
-      >
-        <motion.article
-          initial={{ scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.2 }}
-          className="w-full p-24 rounded-lg text-gray-800"
-        >
-          <h2 className="text-2xl font-medium mb-4">The Elegance of Leisure</h2>
-          <p>
-            Discover the epitome of relaxation and style with our latest
-            collection. Featured here is an ensemble that seamlessly blends
-            indoor comfort with a touch of sporting finesse. Our model, exuding
-            confidence and poise, showcases a pair of delicate pale pink pants
-            paired with a lustrous satin jacket, casually draped over the
-            shoulders for an effortless look. Underneath, a vibrant green
-            sweater harmonizes with the outdoors, accented by a silk neckerchief
-            that punctuates the outfit with a pop of color.
-          </p>
-          <p className="mt-2">
-            True to Louis Vuitton&apos;s attention to detail, accessories
-            include a floral-patterned belt, a versatile green cross-body bag,
-            and a matching golf glove, adding both function and flair. The open
-            sandals echo the collection&apos;s green motif, offering both
-            comfort and coordination. Our model stands poised with a golf club,
-            surrounded by golf balls, indicating a leisurely indoor putting
-            practice.
-          </p>
-          <p className="mt-4 italic">
-            Indulge in the luxury of downtime with Louis Vuitton.
-          </p>
-        </motion.article>
-      </motion.div>
-    </section>
-  );
-};
-
-const Card = ({ card, controls }: { card: CardType; controls?: any }) => {
-  return (
-    <motion.div
-      className="group relative overflow-hidden"
-      style={{ minWidth: "300px", minHeight: "450px" }}
-      animate={controls}
-    >
-      <h4
-        className="text-xs uppercase font-medium"
-        style={{ opacity: controls ? 0 : 1 }}
-      >
-        {card.title}
-      </h4>
-      <span
-        className="text-black text-xs uppercase font-thin me-2 px-2.5 py-0.5 mb-4 border border-black"
-        style={{ opacity: controls ? 0 : 1 }}
-      >
-        LVOVERS
-      </span>
-      <div
-        style={{
-          backgroundImage: `url(${card.url})`,
-          backgroundSize: "contain",
-          backgroundPosition: "top center",
-          backgroundRepeat: "no-repeat",
-          width: "100%",
-          height: "100%",
-        }}
-        className="absolute z-0 mt-4 transition-transform duration-300 group-hover:scale-105"
-      ></div>
-    </motion.div>
-  );
-};
-export default Example;
-
 type CardType = {
   url: string;
   title: string;
@@ -263,7 +258,7 @@ const cards: CardType[] = [
   },
   {
     url: "https://eu.louisvuitton.com/content/dam/lv/online/high-end/wolv/fashion-shows/M_Fa_Show_Mens_SS24.html/jcr:content/assets/grid/230620_LV_MEN_SHOW_KEY_LOOK_06_0015_MENS_SS24_SHOW_KEY_LOOKS_GROUPSHOT_LVCOM_DI3_2048x1152_8.jpg?imwidth=2400",
-    title: "Men&apos;s Ensemble",
+    title: "Men's Ensemble",
     id: 2,
   },
   {
@@ -302,3 +297,5 @@ const cards: CardType[] = [
     id: 9,
   },
 ];
+
+export default Example;

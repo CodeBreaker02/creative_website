@@ -1,7 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
 import { motion, useAnimation } from "framer-motion";
-import SmoothScroll from "@/app/components/HorizontalGallery";
 
 export default function HomePage() {
   const controls = useAnimation();
@@ -70,6 +69,15 @@ export default function HomePage() {
     return () => observer.disconnect();
   }, [controls]);
 
+  const floatingAnimation = {
+    y: [0, -10, 0],
+    transition: {
+      duration: 2,
+      repeat: Infinity,
+      ease: "easeInOut",
+    },
+  };
+
   return (
     <motion.div
       initial={{ backgroundColor: "#ffffff", color: "#000000" }}
@@ -80,27 +88,34 @@ export default function HomePage() {
       {sectionsData.map(
         ({ id, bgcolor, textcolor, title, text, imageUrl, alignRight }) => (
           <section
+            key={id}
             id={id}
             data-bgcolor={bgcolor}
             data-textcolor={textcolor}
-            className="min-h-screen flex items-center justify-center flex-wrap md:flex-nowrap p-20"
-            key={id}
+            className="min-h-screen flex flex-col md:flex-row items-center justify-center p-4 md:p-20"
           >
             <div
-              className={`w-full md:w-1/2 md:px-12 py-8 float ${alignRight ? "md:order-last" : ""}`}
+              className={`w-full md:w-1/2 md:px-12 py-8 ${
+                alignRight ? "md:order-last" : ""
+              }`}
             >
-              <img
-                src={imageUrl}
-                alt={title}
-                className="max-w-[500px] h-auto rounded-2xl shadow-lg w-full"
-              />
+              <motion.div
+                animate={floatingAnimation}
+                className="w-full h-full flex items-center justify-center"
+              >
+                <img
+                  src={imageUrl}
+                  alt={title}
+                  className="max-w-[500px] h-auto rounded-2xl shadow-lg w-full"
+                />
+              </motion.div>
             </div>
             <div
               className="w-full md:w-1/2 px-4 md:px-12 py-8"
               style={{ color: textcolor }}
             >
-              <h1 className="text-3xl font-bold mb-4">{title}</h1>
-              <p className="mt-4">{text}</p>
+              <h1 className="text-2xl md:text-3xl font-bold mb-4">{title}</h1>
+              <p className="mt-4 text-sm md:text-base">{text}</p>
             </div>
           </section>
         ),
