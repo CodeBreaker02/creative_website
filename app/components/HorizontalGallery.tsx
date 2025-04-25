@@ -10,7 +10,7 @@ const ParallaxCover = () => {
         className="bg-cover bg-center bg-no-repeat min-h-screen flex items-center justify-center w-screen"
         style={{
           backgroundImage:
-            'url("https://cdn.sanity.io/images/7hnw2swn/production/99d9d713b2e90c43b5aabca691ef83892100dbcd-7852x5237.jpg?rect=0,411,7852,4417&amp;w=640&amp;h=360&amp;q=75&amp;fit=crop&amp;auto=format%20640w,")',
+            'url("https://www.meetings.fr/wp-content/uploads/2024/07/Montage-JAV-2024-Mobilier-meetings-theatre-anthique-4.jpg")',
           scale,
         }}
       >
